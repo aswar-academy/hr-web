@@ -83,9 +83,10 @@ export default Vue.extend({
         .v-text-field {
             width: 200px;
         }
-    .main-card{
-        margin: 10px;
-    }
+    
+        .main-card {
+            margin: 10px;
+        }
     }
     </style>
   

@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
+import UserProfile from "../views/UserProfile.vue";
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
@@ -14,6 +15,11 @@ const routes: Array<RouteConfig> = [
     path: "/login",
     name: "login",
     component: LoginView,
+  },
+  {
+    path: "/user-profile/:id",
+    name: "user-profile",
+    component: UserProfile,
   },
   
 ];

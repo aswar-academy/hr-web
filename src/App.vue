@@ -22,8 +22,10 @@ export default Vue.extend({
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap');
 
-h1 ,p{
+h1,
+p,
+strong,
+h3 {
   font-family: 'Vazirmatn', sans-serif;
 }
-
 </style>
