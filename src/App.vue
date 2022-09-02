@@ -1,6 +1,6 @@
 <template>
   <v-app>
-
+<Navbar v-if="hide"/>
 
     <v-main>
       <router-view />
@@ -10,13 +10,19 @@
 
 <script lang="ts">
 import Vue from 'vue';
-
+import Navbar from '@/components/Navbar.vue'
 export default Vue.extend({
   name: 'App',
 
   data: () => ({
     //
   }),
+   computed: {
+    hide() {
+      return this.$route.path !== "/login";
+    },
+  },
+  components:{Navbar}
 });
 </script>
 <style>

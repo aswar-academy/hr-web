@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-container>
-
       <v-row no-gutters>
         <template v-for="n in 12">
           <v-col :key="n">
@@ -10,7 +9,6 @@
           <v-responsive v-if="n % 4 === 0" :key="`width-${n}`" width="100%"></v-responsive>
         </template>
       </v-row>
-
     </v-container>
   </div>
 </template>
@@ -23,8 +21,6 @@ export default Vue.extend({
   components: {
     UserCard
   },
-  data: () => ({
-   
-  }),
+  data: () => ({})
 });
 </script>
