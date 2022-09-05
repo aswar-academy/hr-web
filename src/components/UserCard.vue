@@ -1,25 +1,30 @@
 <template>
-  <v-card style="border-radius: 12px;" elevation="7" class="pa-2 ma-5" @click="goToUserProfile">
+  <v-card
+    style="border-radius: 12px"
+    elevation="7"
+    class="pa-2 ma-5"
+    @click="goToUserProfile"
+  >
     <div id="user-div" class="mb-10">
-      <strong style="color: #2dd8b9;">{{ user.theCondition }}</strong>
+      <strong style="color: #2dd8b9">{{ user.theCondition }}</strong>
     </div>
     <v-row align="center" justify="center">
       <v-avatar size="100">
         <v-img src="../assets/user-photo.svg"></v-img>
       </v-avatar>
     </v-row>
-    <div style="text-align:center;" class="py-5">
+    <div style="text-align: center" class="py-5">
       <h3>{{ user.name }}</h3>
-      <p style="color:#BDC0CA;">{{ user.job }}</p>
+      <p style="color: #bdc0ca">{{ user.job }}</p>
     </div>
-    <div style="  background-color: #F2F8FD; border-radius:6px;">
+    <div style="background-color: #f2f8fd; border-radius: 6px">
       <v-row class="ma-0 pa-0" justify="space-between">
-        <p class="ma-2" style="color:#BDC0CA;">department</p>
-        <p class="ma-2" style="color:#BDC0CA;">the date of join</p>
+        <p class="ma-2" style="color: #bdc0ca">department</p>
+        <p class="ma-2" style="color: #bdc0ca">the date of join</p>
       </v-row>
       <v-row class="ma-0 pa-0" justify="space-between">
-        <p class="ma-2" style="color:#6F7376;">{{ user.department }}</p>
-        <p class="ma-2" style="color:#6F7376;">{{ user.theDateOfJoin }}</p>
+        <p class="ma-2" style="color: #6f7376">{{ user.department }}</p>
+        <p class="ma-2" style="color: #6f7376">{{ user.theDateOfJoin }}</p>
       </v-row>
     </div>
   </v-card>
@@ -32,18 +37,16 @@ export default Vue.extend({
   name: "App",
 
   data: () => ({
-    user: user
+    user: user,
   }),
   methods: {
     goToUserProfile() {
       this.$router.push("/user-profile/" + user.id);
-    }
-  }
+    },
+  },
 });
 </script>
   <style>
-
-
 #user-div {
   background-color: #cef7e3;
   border-radius: 2px;

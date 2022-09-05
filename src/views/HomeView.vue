@@ -6,7 +6,11 @@
           <v-col :key="n">
             <UserCard />
           </v-col>
-          <v-responsive v-if="n % 4 === 0" :key="`width-${n}`" width="100%"></v-responsive>
+          <v-responsive
+            v-if="n % 4 === 0"
+            :key="`width-${n}`"
+            width="100%"
+          ></v-responsive>
         </template>
       </v-row>
     </v-container>
@@ -16,11 +20,15 @@
 <script lang="ts">
 import Vue from "vue";
 import UserCard from "@/components/UserCard.vue";
+import { AuthService, UsersService } from "@/client";
 
 export default Vue.extend({
   components: {
-    UserCard
+    UserCard,
   },
-  data: () => ({})
+  created: () => {
+    UsersService.usersControllerFindAll("USER");
+  },
+  data: () => ({}),
 });
 </script>
