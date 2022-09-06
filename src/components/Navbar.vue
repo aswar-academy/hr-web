@@ -5,9 +5,7 @@
       <h2 class="white--text">swar hr dashboard</h2>
     </v-row>
 
-    <v-btn rounded="20" color="#FFD831" flat small>
-      <v-icon>mdi-plus</v-icon>Add new employee
-    </v-btn>
+    
     <v-btn flat color="#FFD831" text>
       <span>Sign Out</span>
       <v-icon right>mdi-exit-to-app</v-icon>

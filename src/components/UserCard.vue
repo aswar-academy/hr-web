@@ -1,21 +1,15 @@
 <template>
-  <v-card
-    style="border-radius: 12px"
-    elevation="7"
-    class="pa-2 ma-5"
-    @click="goToUserProfile"
-  >
-    <div id="user-div" class="mb-10">
-      <strong style="color: #2dd8b9">{{ user.theCondition }}</strong>
-    </div>
-    <v-row align="center" justify="center">
+  <v-card style="border-radius: 12px" elevation="7" class="pa-2 ma-5" @click="goToUserProfile">
+    <v-row align="center" justify="center" class="pt-3">
       <v-avatar size="100">
         <v-img src="../assets/user-photo.svg"></v-img>
       </v-avatar>
     </v-row>
     <div style="text-align: center" class="py-5">
       <h3>{{ user.name }}</h3>
-      <p>{{ user.email }}</p>
+      <a href>
+        <p class="text-truncate">{{ user.email }}</p>
+      </a>
 
       <p style="color: #bdc0ca">{{ user.jobTitle }}</p>
     </div>
@@ -26,14 +20,14 @@
       </v-row>
       <v-row class="ma-0 pa-0" justify="space-between">
         <p class="ma-2" style="color: #6f7376">{{ user.department.name }}</p>
-        <p class="ma-2" style="color: #6f7376">{{ user.createdAt }}</p>
+        <p class="ma-2" style="color: #6f7376">{{ user.createdAt | formatDate }}</p>
       </v-row>
     </div>
   </v-card>
 </template>
   
 <script lang="ts">
-import { UserDto } from "@/client";
+import { UserData } from "@/client";
 import Vue from "vue";
 
 export default Vue.extend({
@@ -41,27 +35,19 @@ export default Vue.extend({
 
   props: {
     user: {
-      type: Object as () => UserDto,
-      required: true,
+      type: Object as () => UserData,
+      required: true
     },
+    id: {
+      type: Number,
+      required: true
+    }
   },
   data: () => ({}),
   methods: {
     goToUserProfile() {
-      this.$router.push("/user-profile/" + this.user.id);
-    },
-  },
+      this.$router.push("/user/" + this.id);
+    }
+  }
 });
 </script>
-  <style>
-#user-div {
-  background-color: #cef7e3;
-  border-radius: 2px;
-  width: 70px;
-  text-align: center;
-  border-color: #2dd8b9;
-  border-style: solid;
-  border-width: 1px;
-  height: 25px;
-}
-</style>

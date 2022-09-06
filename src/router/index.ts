@@ -17,8 +17,8 @@ const routes: Array<RouteConfig> = [
     component: LoginView,
   },
   {
-    path: "/user-profile/:id",
-    name: "user-profile",
+    path: "/user/:id",
+    name: "UserProfile",
     component: UserProfile,
   },
   
