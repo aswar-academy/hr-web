@@ -2,11 +2,7 @@
   <v-container class="fill-height" fluid>
     <v-row justify="center">
       <v-col cols="12" sm="8" md="8">
-        <v-card
-          elevation="10"
-          style="border-radius: 10px"
-          class="pl-5 main-card"
-        >
+        <v-card elevation="10" style="border-radius: 10px" class="pl-5 main-card">
           <v-row>
             <v-col cols="8">
               <div class="pa-10" style="text-align: center">
@@ -14,8 +10,10 @@
                 <p class="pt-5 blue-text">Ensure your email for registration</p>
               </div>
               <v-row align="center" justify="center">
-                <v-form ref="form">
+                <v-form ref="form " @submit.prevent="login">
                   <v-text-field
+                    v-model="form.email"
+                    :rules="emailValidation"
                     color="#232F49"
                     label="Email"
                     name="email"
@@ -24,6 +22,8 @@
                     required
                   ></v-text-field>
                   <v-text-field
+                    v-model="form.password"
+                    :rules="emailValidation"
                     color="#232F49"
                     label="Password"
                     name="password"
@@ -34,8 +34,7 @@
                     @click:append="showPassword = !showPassword"
                     prepend-icon="mdi-lock"
                     required
-                  >
-                  </v-text-field>
+                  ></v-text-field>
                   <div class="text-center mt-3">
                     <v-btn
                       name="submit"
@@ -44,11 +43,8 @@
                       color="#232F49"
                       rounded
                       dark
-                      @click="login()"
                       class="mb-10"
-                    >
-                      Sign In
-                    </v-btn>
+                    >Login</v-btn>
                   </div>
                 </v-form>
               </v-row>
@@ -65,18 +61,15 @@
               <v-container class="fill-height">
                 <div style="text-align: center">
                   <v-img
-                    src="../assets/logo.svg"
+                    src="../assets/Logo.svg"
                     max-width="150"
                     style="margin-left: 60px"
                     v-if="$vuetify.breakpoint.lg || $vuetify.breakpoint.xl"
-                  >
-                  </v-img>
+                  ></v-img>
                   <p
                     class="pt-10 white--text"
                     v-if="$vuetify.breakpoint.lg || $vuetify.breakpoint.xl"
-                  >
-                    Enter your personal details and start journey with us
-                  </p>
+                  >Enter your personal details and start journey with us</p>
                 </div>
               </v-container>
             </v-col>
@@ -84,29 +77,63 @@
         </v-card>
       </v-col>
     </v-row>
+    <div class="text-center">
+      <v-dialog v-model="dialog" width="500">
+        <v-card>
+          <v-card-title>Error occurred!</v-card-title>
+          <v-card-actions>
+            <v-btn v-btn color="primary" text @click="dialog = false">Ok</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
   </v-container>
 </template>
 <script lang="ts">
-import { AuthService } from "@/client";
+import { AuthService, LoginDto } from "@/client";
+import { Validation } from "@/types/Validation";
+import { emailValidation, passwordValidation } from "@/utils/Validation";
+import { TOKEN } from "@/utils/keys";
 import Vue from "vue";
+interface LoginData {
+  dialog: boolean;
 
+  showPassword: boolean;
+  form: any;
+  emailValidation: Validation;
+  passwordValidation: Validation;
+}
 export default Vue.extend({
-  data() {
+  data(): LoginData {
+    const defaultForm: LoginDto = {
+      password: "",
+      email: ""
+    };
     return {
-      showPassword: false,
+      dialog: false,
 
-      emailRules: [
-        (v: string) => !!v || "E-mail is required",
-        (v: string) => /.+@.+/.test(v) || "E-mail must be valid",
-      ],
+      showPassword: false,
+      form: defaultForm,
+      emailValidation: emailValidation,
+      passwordValidation: passwordValidation
     };
   },
   methods: {
-    async login() {
-      console.log("data");
-    },
+    login(): void {
+      AuthService.authControllerLogin({
+        email: this.form.email,
+        password: this.form.password
+      })
+        .then(value => {
+          localStorage.setItem(TOKEN, value.access_token);
+          this.$router.push("/");
+        })
+        .catch(() => {
+          this.dialog = true;
+        });
+    }
   },
-  components: {},
+  components: {}
 });
 </script>
     <style>
