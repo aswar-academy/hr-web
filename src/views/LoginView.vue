@@ -125,7 +125,7 @@ export default Vue.extend({
         password: this.form.password
       })
         .then(value => {
-          localStorage.setItem(TOKEN, value.access_token);
+          localStorage.setItem(TOKEN, value.token);
           this.$router.push("/");
         })
         .catch(() => {
