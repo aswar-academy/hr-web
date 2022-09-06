@@ -12,4 +12,3 @@ export type UserDto = {
     id: number;
     createdAt: string;
 };
-

@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CreateUserDto } from '../models/CreateUserDto';
-import type { UserDto } from '../models/UserDto';
+import type { UserData } from '../models/UserData';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -11,13 +11,13 @@ import { request as __request } from '../core/request';
 export class UsersService {
 
     /**
-     * @param requestBody
-     * @returns any
+     * @param requestBody 
+     * @returns UserData 
      * @throws ApiError
      */
     public static usersControllerCreate(
-        requestBody: CreateUserDto,
-    ): CancelablePromise<any> {
+requestBody: CreateUserDto,
+): CancelablePromise<UserData> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users',
@@ -27,13 +27,13 @@ export class UsersService {
     }
 
     /**
-     * @param role
-     * @returns UserDto
+     * @param role 
+     * @returns UserData 
      * @throws ApiError
      */
     public static usersControllerFindAll(
-        role: 'USER' | 'ADMIN',
-    ): CancelablePromise<Array<UserDto>> {
+role: 'USER' | 'ADMIN',
+): CancelablePromise<Array<UserData>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users',
@@ -44,13 +44,13 @@ export class UsersService {
     }
 
     /**
-     * @param id
-     * @returns any
+     * @param id 
+     * @returns UserData 
      * @throws ApiError
      */
     public static usersControllerFindOne(
-        id: number,
-    ): CancelablePromise<any> {
+id: number,
+): CancelablePromise<UserData> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{id}',

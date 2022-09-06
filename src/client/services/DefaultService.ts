@@ -10,13 +10,13 @@ import { request as __request } from '../core/request';
 export class DefaultService {
 
     /**
-     * @param id
-     * @returns any
+     * @param id 
+     * @returns any 
      * @throws ApiError
      */
     public static appControllerGetTaskById(
-        id: string,
-    ): CancelablePromise<any> {
+id: string,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/task/{id}',
@@ -27,13 +27,13 @@ export class DefaultService {
     }
 
     /**
-     * @param id
-     * @returns any
+     * @param id 
+     * @returns any 
      * @throws ApiError
      */
     public static appControllerDeleteTask(
-        id: string,
-    ): CancelablePromise<any> {
+id: string,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/task/{id}',
@@ -44,7 +44,7 @@ export class DefaultService {
     }
 
     /**
-     * @returns any
+     * @returns any 
      * @throws ApiError
      */
     public static appControllerGetDoneTasks(): CancelablePromise<any> {
@@ -55,13 +55,13 @@ export class DefaultService {
     }
 
     /**
-     * @param searchString
-     * @returns any
+     * @param searchString 
+     * @returns any 
      * @throws ApiError
      */
     public static appControllerGetFilteredTasks(
-        searchString: string,
-    ): CancelablePromise<any> {
+searchString: string,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/filtered-tasks/{searchString}',
@@ -72,7 +72,7 @@ export class DefaultService {
     }
 
     /**
-     * @returns any
+     * @returns any 
      * @throws ApiError
      */
     public static appControllerCreateDraft(): CancelablePromise<any> {
@@ -83,13 +83,13 @@ export class DefaultService {
     }
 
     /**
-     * @param requestBody
-     * @returns any
+     * @param requestBody 
+     * @returns any 
      * @throws ApiError
      */
     public static appControllerSignupUser(
-        requestBody: CreateUserDto,
-    ): CancelablePromise<any> {
+requestBody: CreateUserDto,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/user',
@@ -99,13 +99,13 @@ export class DefaultService {
     }
 
     /**
-     * @param id
-     * @returns any
+     * @param id 
+     * @returns any 
      * @throws ApiError
      */
     public static appControllerDoneTask(
-        id: string,
-    ): CancelablePromise<any> {
+id: string,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/done/{id}',

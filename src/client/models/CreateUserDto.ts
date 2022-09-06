@@ -11,4 +11,3 @@ export type CreateUserDto = {
     salary: number;
     departmentId: number;
 };
-

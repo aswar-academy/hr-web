@@ -1,8 +1,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CreateUserDto } from '../models/CreateUserDto';
 import type { LoginDto } from '../models/LoginDto';
+import type { RegistrationDto } from '../models/RegistrationDto';
 import type { UserDto } from '../models/UserDto';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -12,7 +12,7 @@ import { request as __request } from '../core/request';
 export class AuthService {
 
     /**
-     * @returns UserDto
+     * @returns UserDto 
      * @throws ApiError
      */
     public static authControllerGetProfile(): CancelablePromise<UserDto> {
@@ -23,29 +23,13 @@ export class AuthService {
     }
 
     /**
-     * @param requestBody
-     * @returns any
-     * @throws ApiError
-     */
-    public static authControllerRegister(
-        requestBody: CreateUserDto,
-    ): CancelablePromise<any> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/auth/register',
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
-    /**
-     * @param requestBody
-     * @returns any
+     * @param requestBody 
+     * @returns RegistrationDto 
      * @throws ApiError
      */
     public static authControllerLogin(
-        requestBody: LoginDto,
-    ): CancelablePromise<any> {
+requestBody: LoginDto,
+): CancelablePromise<RegistrationDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/auth/login',
