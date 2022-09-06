@@ -2,13 +2,13 @@
   <div>
     <v-container>
       <v-row no-gutters>
-        <template v-for="n in 12">
-          <v-col :key="n">
-            <UserCard />
+        <template v-for="(user, n) in users">
+          <v-col :key="user.id">
+            <UserCard :user="userModel" />
           </v-col>
           <v-responsive
             v-if="n % 4 === 0"
-            :key="`width-${n}`"
+            :key="`width-${user}`"
             width="100%"
           ></v-responsive>
         </template>
@@ -18,17 +18,26 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { UserDto, UsersService } from "@/client";
 import UserCard from "@/components/UserCard.vue";
-import { AuthService, UsersService } from "@/client";
+import Vue from "vue";
 
+interface HomeViewData {
+  users: Array<UserDto>;
+  userModel: string;
+}
 export default Vue.extend({
   components: {
     UserCard,
   },
-  created: () => {
-    UsersService.usersControllerFindAll("USER");
+  data: function (): HomeViewData {
+    return {
+      users: [],
+      userModel: "",
+    };
   },
-  data: () => ({}),
+  created: async function () {
+    this.users = await UsersService.usersControllerFindAll("USER");
+  },
 });
 </script>

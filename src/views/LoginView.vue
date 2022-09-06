@@ -87,7 +87,6 @@
   </v-container>
 </template>
 <script lang="ts">
-import { AuthService } from "@/client";
 import Vue from "vue";
 
 export default Vue.extend({

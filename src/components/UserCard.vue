@@ -15,33 +15,40 @@
     </v-row>
     <div style="text-align: center" class="py-5">
       <h3>{{ user.name }}</h3>
-      <p style="color: #bdc0ca">{{ user.job }}</p>
+      <p>{{ user.email }}</p>
+
+      <p style="color: #bdc0ca">{{ user.jobTitle }}</p>
     </div>
     <div style="background-color: #f2f8fd; border-radius: 6px">
       <v-row class="ma-0 pa-0" justify="space-between">
-        <p class="ma-2" style="color: #bdc0ca">department</p>
-        <p class="ma-2" style="color: #bdc0ca">the date of join</p>
+        <p class="ma-2" style="color: #bdc0ca">Department</p>
+        <p class="ma-2" style="color: #bdc0ca">The date of join</p>
       </v-row>
       <v-row class="ma-0 pa-0" justify="space-between">
-        <p class="ma-2" style="color: #6f7376">{{ user.department }}</p>
-        <p class="ma-2" style="color: #6f7376">{{ user.theDateOfJoin }}</p>
+        <p class="ma-2" style="color: #6f7376">{{ user.department.name }}</p>
+        <p class="ma-2" style="color: #6f7376">{{ user.createdAt }}</p>
       </v-row>
     </div>
   </v-card>
 </template>
   
-  <script lang="ts">
+<script lang="ts">
+import { UserDto } from "@/client";
 import Vue from "vue";
-import user from "../UserInfo";
+
 export default Vue.extend({
   name: "App",
 
-  data: () => ({
-    user: user,
-  }),
+  props: {
+    user: {
+      type: Object as () => UserDto,
+      required: true,
+    },
+  },
+  data: () => ({}),
   methods: {
     goToUserProfile() {
-      this.$router.push("/user-profile/" + user.id);
+      this.$router.push("/user-profile/" + this.user.id);
     },
   },
 });
