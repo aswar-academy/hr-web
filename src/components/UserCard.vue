@@ -2,12 +2,12 @@
   <v-card style="border-radius: 12px" elevation="7" class="pa-2 ma-5" @click="goToUserProfile">
     <v-row align="center" justify="center" class="pt-3">
       <v-avatar size="100">
-        <v-img src="../assets/user-photo.svg"></v-img>
+        <v-img src="../assets/user-avatar.svg"></v-img>
       </v-avatar>
     </v-row>
     <div style="text-align: center" class="py-5">
       <h3>{{ user.name }}</h3>
-      <a href>
+      <a href="mailto:user.email" style="text-decoration: none;">
         <p class="text-truncate">{{ user.email }}</p>
       </a>
 
