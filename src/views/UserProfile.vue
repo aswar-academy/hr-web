@@ -1,7 +1,12 @@
 <template>
   <div>
     <v-row align="center" justify="center" class="pt-10">
-      <v-progress-circular size="60" color="#FFD831" v-if="loading" indeterminate></v-progress-circular>
+      <v-progress-circular
+        size="60"
+        color="#FFD831"
+        v-if="loading"
+        indeterminate
+      ></v-progress-circular>
     </v-row>
     <div v-if="user == null"></div>
     <div class="pa-10" v-else>
@@ -23,7 +28,7 @@
           <v-divider width="200"></v-divider>
           <div class="pt-4">
             <a href="https://academy.aswar.iq/" style="text-decoration: none">
-              <p class="text--secondary " >
+              <p class="text--secondary">
                 <v-icon class="mr-1">mdi-web</v-icon>Aswar Academy
               </p>
             </a>
@@ -38,7 +43,9 @@
               <v-icon class="mr-1">mdi-calendar-range</v-icon>
               <strong>The date of join</strong>
 
-              <p class="pl-7 text--secondary">{{ user.createdAt | formatDate }}</p>
+              <p class="pl-7 text--secondary">
+                {{ user.createdAt | formatDate }}
+              </p>
             </div>
             <div>
               <a href="mailto:user.email" style="text-decoration: none">
@@ -75,7 +82,7 @@
             </p>
             <p>
               <strong class="pr-2">Work end time</strong>
-              {{item.departureTime | formatAttendanceDate}}
+              {{ item.departureTime | formatAttendanceDate }}
             </p>
           </div>
         </v-col>
@@ -99,25 +106,25 @@ export default Vue.extend({
     return {
       user: null,
       id: null,
-      loading: true
+      loading: true,
     };
   },
   methods: {
     getUser() {
       this.loading = true;
       if (this.id) {
-        UsersService.usersControllerFindOne(this.id).then(value => {
+        UsersService.findOne(this.id).then((value) => {
           this.user = value;
           this.id = value.id;
         });
       }
       this.loading = false;
-    }
+    },
   },
   created() {
-    this.id = (this.$route.params.id as unknown) as number;
+    this.id = this.$route.params.id as unknown as number;
     this.getUser();
-  }
+  },
 });
 </script>
 <style>
