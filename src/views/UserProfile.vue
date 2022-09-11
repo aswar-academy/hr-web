@@ -61,15 +61,20 @@
         <v-col cols="5">
           <p class="overline text--disabled pt-4 ma-0">employee Tasks</p>
           <v-divider width="200"></v-divider>
-          <v-container id="task-container" class="mt-5">
+          <v-container
+            id="task-container"
+            class="mt-5"
+            v-for="task in user.tasks"
+            :key="task.id"
+          >
+            <p>{{ task.title }}</p>
+          </v-container>
+          <!-- <v-container id="task-container" class="mt-5">
             <p>Create hr-web project and repository to aswar dashboard</p>
           </v-container>
           <v-container id="task-container" class="mt-5">
             <p>Create hr-web project and repository to aswar dashboard</p>
-          </v-container>
-          <v-container id="task-container" class="mt-5">
-            <p>Create hr-web project and repository to aswar dashboard</p>
-          </v-container>
+          </v-container> -->
         </v-col>
         <v-col>
           <p class="overline text--disabled pt-4 ma-0">employee Attendance</p>

@@ -66,7 +66,7 @@
               <v-container class="fill-height">
                 <div style="text-align: center">
                   <v-img
-                    src="../assets/Logo.svg"
+                    src="../assets/app-logo.svg"
                     max-width="150"
                     style="margin-left: 60px"
                     v-if="$vuetify.breakpoint.lg || $vuetify.breakpoint.xl"
@@ -127,7 +127,7 @@ export default Vue.extend({
   },
   methods: {
     login(): void {
-      AuthService.authControllerLogin({
+      AuthService.login({
         email: this.form.email,
         password: this.form.password,
       })
