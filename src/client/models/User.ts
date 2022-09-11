@@ -2,13 +2,24 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UserDto = {
+export type User = {
     email: string;
     name: string;
-    role: any;
+    role: User.role;
     jobTitle: string;
     salary: number;
     departmentId: number;
     id: number;
     createdAt: string;
 };
+
+export namespace User {
+
+    export enum role {
+        USER = 'USER',
+        ADMIN = 'ADMIN',
+    }
+
+
+}
+

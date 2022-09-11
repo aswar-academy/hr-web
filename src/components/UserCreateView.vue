@@ -1,15 +1,29 @@
 <template>
   <div class="pt-5">
-    <v-btn rounded="20" color="#f2f8fd" flat small class="ml-6" @click="dialogCreate = true">
+    <v-btn
+      rounded="20"
+      color="#f2f8fd"
+      flat
+      small
+      class="ml-6"
+      @click="dialogCreate = true"
+    >
       <v-icon>mdi-plus</v-icon>Add new employee
     </v-btn>
-    <v-dialog v-model="dialogCreate" fullscreen hide-overlay transition="dialog-top-transition">
+    <v-dialog
+      v-model="dialogCreate"
+      fullscreen
+      hide-overlay
+      transition="dialog-top-transition"
+    >
       <v-card>
         <v-toolbar dark color="#f2f8fd">
           <v-btn icon dark @click="dialogCreate = false">
             <v-icon color="#232F49">mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title style="color:#232F49;">Add New employee</v-toolbar-title>
+          <v-toolbar-title style="color: #232f49"
+            >Add New employee</v-toolbar-title
+          >
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn dark text color="#232F49" @click="createUser">Save</v-btn>
@@ -98,7 +112,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { UsersService, CreateUserDto } from "@/client";
+import { UsersService, CreateUser } from "@/client";
 import { UserRole } from "@/types/role";
 import { Validation } from "@/types/Validation";
 import { emailValidation, passwordValidation } from "@/utils/Validation";
@@ -106,7 +120,7 @@ interface UserCreateView {
   dialogCreate: boolean;
   email: Validation;
   password: Validation;
-  userCreate: CreateUserDto;
+  userCreate: CreateUser;
   roles: Array<UserRole>;
   departmentId: number;
 }
@@ -121,12 +135,12 @@ export default Vue.extend({
         email: "test123@gmail.com",
         password: "12345678",
         salary: 1234,
-        departmentId:1,
-        name:"test",
-        role:"USER",
-        jobTitle:"test"
-      } as CreateUserDto,
-      departmentId: 1
+        departmentId: 1,
+        name: "test",
+        role: "USER",
+        jobTitle: "test",
+      } as CreateUser,
+      departmentId: 1,
     };
   },
   methods: {
@@ -135,7 +149,7 @@ export default Vue.extend({
         this.dialogCreate = false;
         this.$emit("userCreated");
       });
-    }
-  }
+    },
+  },
 });
 </script>

@@ -2,9 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { UserData } from './UserData';
+import type { UserDetail } from './UserDetail';
 
 export type RegistrationDto = {
     token: string;
-    user: UserData;
+    user: UserDetail;
 };
+

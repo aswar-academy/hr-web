@@ -1,8 +1,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CreateUserDto } from '../models/CreateUserDto';
-import type { UserData } from '../models/UserData';
+import type { CreateUser } from '../models/CreateUser';
+import type { User } from '../models/User';
+import type { UserDetail } from '../models/UserDetail';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -11,13 +12,14 @@ import { request as __request } from '../core/request';
 export class UsersService {
 
     /**
-     * @param requestBody 
-     * @returns UserData 
+     * @param requestBody
+     * @returns UserDetail
+     * @returns User
      * @throws ApiError
      */
     public static usersControllerCreate(
-requestBody: CreateUserDto,
-): CancelablePromise<UserData> {
+        requestBody: CreateUser,
+    ): CancelablePromise<UserDetail | User> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users',
@@ -27,30 +29,36 @@ requestBody: CreateUserDto,
     }
 
     /**
-     * @param role 
-     * @returns UserData 
+     * @param role
+     * @param skip
+     * @param take
+     * @returns any
      * @throws ApiError
      */
     public static usersControllerFindAll(
-role: 'USER' | 'ADMIN',
-): CancelablePromise<Array<UserData>> {
+        role: 'USER' | 'ADMIN',
+        skip?: number,
+        take?: number,
+    ): CancelablePromise<> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users',
             query: {
                 'role': role,
+                'skip': skip,
+                'take': take,
             },
         });
     }
 
     /**
-     * @param id 
-     * @returns UserData 
+     * @param id
+     * @returns UserDetail
      * @throws ApiError
      */
     public static usersControllerFindOne(
-id: number,
-): CancelablePromise<UserData> {
+        id: number,
+    ): CancelablePromise<UserDetail> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{id}',

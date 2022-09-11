@@ -1,9 +1,9 @@
 <template>
   <div>
-    <UserCreateView @userCreated="getUsers"/>
+    <UserCreateView @userCreated="getUsers" />
     <v-container>
       <v-row no-gutters>
-        <template v-for="(user) in users">
+        <template v-for="user in users">
           <v-col :key="user.id" cols="12" md="3">
             <UserCard :user="user" :id="user.id" />
           </v-col>
@@ -14,31 +14,31 @@
 </template>
 
 <script lang="ts">
-import { UserDto, UsersService } from "@/client";
+import { User, UsersService } from "@/client";
 import UserCard from "@/components/UserCard.vue";
 import UserCreateView from "@/components/UserCreateView.vue";
 import Vue from "vue";
 
 interface HomeViewData {
-  users: Array<UserDto>;
+  users: Array<User>;
 }
 export default Vue.extend({
   components: {
     UserCard,
-    UserCreateView
+    UserCreateView,
   },
-  data: function(): HomeViewData {
+  data: function (): HomeViewData {
     return {
-      users: []
+      users: [],
     };
   },
-  methods:{
-   async getUsers(){
+  methods: {
+    async getUsers() {
       this.users = await UsersService.usersControllerFindAll("USER");
-    }
+    },
   },
-created() {
-  this.getUsers()
-}
+  created() {
+    this.getUsers();
+  },
 });
 </script>

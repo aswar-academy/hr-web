@@ -2,8 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type DepartmentDto = {
+export type Attendance = {
     id: number;
     createdAt: string;
-    name: string;
+    departureTime: string;
+    userId: number;
 };
+
