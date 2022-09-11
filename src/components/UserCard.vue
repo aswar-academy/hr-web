@@ -1,8 +1,8 @@
 <template>
   <v-card
     style="border-radius: 12px"
-    elevation="7"
-    class="pa-2 ma-5"
+    elevation="2"
+    class="pa-2 ma-2"
     @click="goToUserProfile"
   >
     <v-row align="center" justify="center" class="pt-3">

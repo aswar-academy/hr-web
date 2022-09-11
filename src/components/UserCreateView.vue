@@ -1,8 +1,9 @@
 <template>
-  <div class="pt-5">
-    <v-btn rounded="20" color="#f2f8fd" flat small class="ml-6" @click="dialogCreate = true">
-      <v-icon>mdi-plus</v-icon>Add new employee
+  <v-container class="pa-0">
+    <v-btn color="#ffd831" dark fixed fab class="mt-5" @click="dialogCreate = true" elevation="1">
+      <v-icon color="#232F49">mdi-plus</v-icon>
     </v-btn>
+
     <v-dialog v-model="dialogCreate" fullscreen hide-overlay transition="dialog-top-transition">
       <v-card>
         <v-toolbar dark color="#f2f8fd">
@@ -70,17 +71,6 @@
                 required
               ></v-text-field>
             </v-col>
-            <!-- <v-col cols="12" sm="4">
-              <v-text-field
-                outlined
-                ref="salary"
-                v-model="userCreate.salary"
-                label="Salary"
-                required
-              ></v-text-field>
-            </v-col>-->
-          </v-row>
-          <v-row>
             <v-col cols="12" md="3">
               <v-autocomplete
                 label="Department"
@@ -92,11 +82,20 @@
                 v-model="userCreate.departmentId"
               ></v-autocomplete>
             </v-col>
+            <!-- <v-col cols="12" sm="4">
+              <v-text-field
+                outlined
+                ref="salary"
+                v-model="userCreate.salary"
+                label="Salary"
+                required
+              ></v-text-field>
+            </v-col>-->
           </v-row>
         </v-container>
       </v-card>
     </v-dialog>
-  </div>
+  </v-container>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -105,12 +104,11 @@ import {
   CreateUser,
   DepartmentsService,
   Paginated,
-  Department,
-  
+  Department
 } from "@/client";
 import { Validation } from "@/types/Validation";
 import { emailValidation, passwordValidation } from "@/utils/Validation";
-interface UserCreateView {
+interface UserCreateViewData {
   dialogCreate: boolean;
   email: Validation;
   password: Validation;
@@ -120,7 +118,7 @@ interface UserCreateView {
   departments: Array<Department>;
 }
 export default Vue.extend({
-  data(): UserCreateView {
+  data(): UserCreateViewData {
     return {
       dialogCreate: false,
       roles: Object.values(CreateUser.role),

@@ -1,6 +1,9 @@
 <template>
   <div>
+    <UsersFilter @rolesChanged="rolesChanged" />
+
     <UserCreateView @userCreated="getUsers" />
+
     <v-container>
       <v-row no-gutters>
         <template v-for="user in users">
@@ -16,6 +19,7 @@
 <script lang="ts">
 import { User, UsersService, Paginated } from "@/client";
 import UserCard from "@/components/UserCard.vue";
+import UsersFilter from "@/components/UsersFilter.vue";
 import UserCreateView from "@/components/UserCreateView.vue";
 import Vue from "vue";
 
@@ -26,24 +30,25 @@ export default Vue.extend({
   components: {
     UserCard,
     UserCreateView,
+    UsersFilter
   },
-  data: function (): HomeViewData {
+  data: function(): HomeViewData {
     return {
-      users: [],
+      users: []
     };
   },
   methods: {
-    async getUsers() {
-      const data = (await UsersService.usersControllerFindAll(
-        "USER",
-        0,
-        25
-      )) as Paginated;
+    async getUsers(role: User.role = User.role.USER) {
+      const data = await UsersService.usersControllerFindAll(role, 0, 25);
       this.users = data.results;
     },
+    rolesChanged(role: User.role) {
+      this.getUsers(role);
+    }
   },
+
   created() {
-    this.getUsers();
-  },
+    this.getUsers(User.role.USER);
+  }
 });
 </script>
