@@ -2,7 +2,7 @@
   <v-app-bar color="#232F49" app>
     <v-row class="px-5">
       <h2 style="color: #ffd831">A</h2>
-      <h2 class="white--text">Aswar hr dashboard</h2>
+      <h2 class="white--text">swar hr dashboard</h2>
     </v-row>
 
     <v-btn flat color="#FFD831" text @click="logout">
