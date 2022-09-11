@@ -8,3 +8,4 @@ export type PaginatedUser = {
     total: number;
     results: Array<User>;
 };
+

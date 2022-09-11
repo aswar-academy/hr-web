@@ -3,7 +3,7 @@
 /* eslint-disable */
 import type { CreateDepartment } from '../models/CreateDepartment';
 import type { Department } from '../models/Department';
-import type { Paginated } from '../models/Paginated';
+import type { PaginatedDepartment } from '../models/PaginatedDepartment';
 import type { UpdateDepartment } from '../models/UpdateDepartment';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -17,7 +17,7 @@ export class DepartmentsService {
      * @returns Department
      * @throws ApiError
      */
-    public static departmentControllerCreate(
+    public static create(
         requestBody: CreateDepartment,
     ): CancelablePromise<Department> {
         return __request(OpenAPI, {
@@ -31,13 +31,13 @@ export class DepartmentsService {
     /**
      * @param skip
      * @param take
-     * @returns any
+     * @returns PaginatedDepartment
      * @throws ApiError
      */
-    public static departmentControllerFindAll(
-        skip: number,
-        take: number,
-    ): CancelablePromise<Paginated> {
+    public static findAll(
+        skip?: number,
+        take?: number,
+    ): CancelablePromise<PaginatedDepartment> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/departments',
@@ -53,7 +53,7 @@ export class DepartmentsService {
      * @returns Department
      * @throws ApiError
      */
-    public static departmentControllerFindOne(
+    public static findOne(
         id: number,
     ): CancelablePromise<Department> {
         return __request(OpenAPI, {
@@ -71,7 +71,7 @@ export class DepartmentsService {
      * @returns Department
      * @throws ApiError
      */
-    public static departmentControllerUpdate(
+    public static update(
         id: number,
         requestBody: UpdateDepartment,
     ): CancelablePromise<Department> {
@@ -91,7 +91,7 @@ export class DepartmentsService {
      * @returns Department
      * @throws ApiError
      */
-    public static departmentControllerDelete(
+    public static delete(
         id: number,
     ): CancelablePromise<Department> {
         return __request(OpenAPI, {

@@ -3,7 +3,7 @@
 /* eslint-disable */
 import type { Attendance } from '../models/Attendance';
 import type { CreateAttendance } from '../models/CreateAttendance';
-import type { Paginated } from '../models/Paginated';
+import type { PaginatedAttendance } from '../models/PaginatedAttendance';
 import type { UpdateAttendance } from '../models/UpdateAttendance';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -17,7 +17,7 @@ export class AttendancesService {
      * @returns Attendance
      * @throws ApiError
      */
-    public static attendanceControllerCreate(
+    public static create(
         requestBody: CreateAttendance,
     ): CancelablePromise<Attendance> {
         return __request(OpenAPI, {
@@ -31,13 +31,13 @@ export class AttendancesService {
     /**
      * @param skip
      * @param take
-     * @returns any
+     * @returns PaginatedAttendance
      * @throws ApiError
      */
-    public static attendanceControllerFindAll(
-        skip: number,
-        take: number,
-    ): CancelablePromise<Paginated> {
+    public static findAll(
+        skip?: number,
+        take?: number,
+    ): CancelablePromise<PaginatedAttendance> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/attendances',
@@ -53,7 +53,7 @@ export class AttendancesService {
      * @returns Attendance
      * @throws ApiError
      */
-    public static attendanceControllerFindOne(
+    public static findOne(
         id: number,
     ): CancelablePromise<Attendance> {
         return __request(OpenAPI, {
@@ -71,7 +71,7 @@ export class AttendancesService {
      * @returns Attendance
      * @throws ApiError
      */
-    public static attendanceControllerUpdate(
+    public static update(
         id: number,
         requestBody: UpdateAttendance,
     ): CancelablePromise<Attendance> {
@@ -91,7 +91,7 @@ export class AttendancesService {
      * @returns Attendance
      * @throws ApiError
      */
-    public static attendanceControllerDelete(
+    public static delete(
         id: number,
     ): CancelablePromise<Attendance> {
         return __request(OpenAPI, {

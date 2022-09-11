@@ -8,3 +8,4 @@ export type PaginatedDepartment = {
     total: number;
     results: Array<Department>;
 };
+

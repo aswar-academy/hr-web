@@ -18,24 +18,19 @@ interface UserFilterData {
   roles: Array<User.role>;
 }
 import Vue from "vue";
-import { User, CreateUser } from "../client";
+import { User } from "../client";
 export default Vue.extend({
   data(): UserFilterData {
     return {
       role: User.role.USER,
-      roles: Object.values(User.role)
+      roles: Object.values(User.role),
     };
-  },
-  props: {
-    users: {
-      type: Array
-    }
   },
   methods: {
     onFilterChange(role: User.role) {
       this.$emit("rolesChanged", role);
-    }
-  }
+    },
+  },
 });
 </script>
 <style>

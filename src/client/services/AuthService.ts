@@ -15,7 +15,7 @@ export class AuthService {
      * @returns UserDetail
      * @throws ApiError
      */
-    public static authControllerGetProfile(): CancelablePromise<UserDetail> {
+    public static getProfile(): CancelablePromise<UserDetail> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/auth/profile',
@@ -27,7 +27,7 @@ export class AuthService {
      * @returns RegistrationDto
      * @throws ApiError
      */
-    public static authControllerLogin(
+    public static login(
         requestBody: LoginDto,
     ): CancelablePromise<RegistrationDto> {
         return __request(OpenAPI, {

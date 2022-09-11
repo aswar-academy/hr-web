@@ -8,3 +8,4 @@ export type PaginatedAttendance = {
     total: number;
     results: Array<Attendance>;
 };
+

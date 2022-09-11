@@ -8,3 +8,4 @@ export type PaginatedTask = {
     total: number;
     results: Array<Task>;
 };
+

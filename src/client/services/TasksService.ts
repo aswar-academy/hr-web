@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CreateTask } from '../models/CreateTask';
-import type { Paginated } from '../models/Paginated';
+import type { PaginatedTask } from '../models/PaginatedTask';
 import type { Task } from '../models/Task';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -12,13 +12,22 @@ import { request as __request } from '../core/request';
 export class TasksService {
 
     /**
-     * @returns any
+     * @param skip
+     * @param take
+     * @returns PaginatedTask
      * @throws ApiError
      */
-    public static tasksControllerFindAll(): CancelablePromise<Paginated> {
+    public static findAll(
+        skip?: any,
+        take?: any,
+    ): CancelablePromise<PaginatedTask> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/tasks',
+            query: {
+                'skip': skip,
+                'take': take,
+            },
         });
     }
 
@@ -27,7 +36,7 @@ export class TasksService {
      * @returns Task
      * @throws ApiError
      */
-    public static tasksControllerCreate(
+    public static create(
         requestBody: CreateTask,
     ): CancelablePromise<Task> {
         return __request(OpenAPI, {
@@ -43,7 +52,7 @@ export class TasksService {
      * @returns Task
      * @throws ApiError
      */
-    public static tasksControllerFindOne(
+    public static findOne(
         id: number,
     ): CancelablePromise<Task> {
         return __request(OpenAPI, {
@@ -61,7 +70,7 @@ export class TasksService {
      * @returns Task
      * @throws ApiError
      */
-    public static tasksControllerMarkAs(
+    public static markAs(
         id: number,
         role: 'DOING' | 'TODO' | 'DONE',
     ): CancelablePromise<Task> {
