@@ -3,6 +3,7 @@
 /* eslint-disable */
 import type { Attendance } from '../models/Attendance';
 import type { CreateAttendance } from '../models/CreateAttendance';
+import type { Paginated } from '../models/Paginated';
 import type { UpdateAttendance } from '../models/UpdateAttendance';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -34,9 +35,9 @@ export class AttendancesService {
      * @throws ApiError
      */
     public static attendanceControllerFindAll(
-        skip?: number,
-        take?: number,
-    ): CancelablePromise<> {
+        skip: number,
+        take: number,
+    ): CancelablePromise<Paginated> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/attendances',

@@ -3,6 +3,7 @@
 /* eslint-disable */
 import type { CreateDepartment } from '../models/CreateDepartment';
 import type { Department } from '../models/Department';
+import type { Paginated } from '../models/Paginated';
 import type { UpdateDepartment } from '../models/UpdateDepartment';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -34,9 +35,9 @@ export class DepartmentsService {
      * @throws ApiError
      */
     public static departmentControllerFindAll(
-        skip?: number,
-        take?: number,
-    ): CancelablePromise<> {
+        skip: number,
+        take: number,
+    ): CancelablePromise<Paginated> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/departments',

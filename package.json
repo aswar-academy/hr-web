@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "generate-client": "openapi --input https://shrouded-fortress-33438.herokuapp.com/openapi.json --output ./src/client --client axios"
+    "generate-client": "openapi --input https://shrouded-fortress-33438.herokuapp.com/openapi.json --output ./src/client --client axios",
+    "generate-client-local": "openapi --input http://localhost:3000/openapi.json --output ./src/client --client axios"
   },
   "dependencies": {
     "axios": "^0.27.2",

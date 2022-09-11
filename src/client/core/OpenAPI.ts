@@ -1,7 +1,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import { TOKEN } from '@/utils/keys';
 import type { ApiRequestOptions } from './ApiRequestOptions';
 
 type Resolver<T> = (options: ApiRequestOptions) => Promise<T>;
@@ -20,11 +19,11 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: 'https://shrouded-fortress-33438.herokuapp.com',
+    BASE: '',
     VERSION: '1.0',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',
-    TOKEN: localStorage.getItem(TOKEN)??undefined,
+    TOKEN: undefined,
     USERNAME: undefined,
     PASSWORD: undefined,
     HEADERS: undefined,

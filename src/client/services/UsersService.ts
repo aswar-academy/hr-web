@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CreateUser } from '../models/CreateUser';
+import type { Paginated } from '../models/Paginated';
 import type { User } from '../models/User';
 import type { UserDetail } from '../models/UserDetail';
 
@@ -37,9 +38,9 @@ export class UsersService {
      */
     public static usersControllerFindAll(
         role: 'USER' | 'ADMIN',
-        skip?: number,
-        take?: number,
-    ): CancelablePromise<> {
+        skip: number,
+        take: number,
+    ): CancelablePromise<Paginated> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users',

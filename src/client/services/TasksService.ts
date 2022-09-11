@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CreateTask } from '../models/CreateTask';
+import type { Paginated } from '../models/Paginated';
 import type { Task } from '../models/Task';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -11,22 +12,13 @@ import { request as __request } from '../core/request';
 export class TasksService {
 
     /**
-     * @param skip
-     * @param take
      * @returns any
      * @throws ApiError
      */
-    public static tasksControllerFindAll(
-        skip?: any,
-        take?: any,
-    ): CancelablePromise<> {
+    public static tasksControllerFindAll(): CancelablePromise<Paginated> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/tasks',
-            query: {
-                'skip': skip,
-                'take': take,
-            },
         });
     }
 

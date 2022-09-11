@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { User, UsersService } from "@/client";
+import { User, UsersService, Paginated } from "@/client";
 import UserCard from "@/components/UserCard.vue";
 import UserCreateView from "@/components/UserCreateView.vue";
 import Vue from "vue";
@@ -34,7 +34,12 @@ export default Vue.extend({
   },
   methods: {
     async getUsers() {
-      this.users = await UsersService.usersControllerFindAll("USER");
+      const data = (await UsersService.usersControllerFindAll(
+        "USER",
+        0,
+        25
+      )) as Paginated<User>;
+      this.users = data.results;
     },
   },
   created() {

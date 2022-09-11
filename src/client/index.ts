@@ -13,6 +13,7 @@ export { CreateTask } from './models/CreateTask';
 export { CreateUser } from './models/CreateUser';
 export type { Department } from './models/Department';
 export type { LoginDto } from './models/LoginDto';
+export type { Paginated } from './models/Paginated';
 export type { RegistrationDto } from './models/RegistrationDto';
 export { Task } from './models/Task';
 export type { UpdateAttendance } from './models/UpdateAttendance';
