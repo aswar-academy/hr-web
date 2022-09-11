@@ -66,7 +66,7 @@
               <v-container class="fill-height">
                 <div style="text-align: center">
                   <v-img
-                    src="../assets/Logo.svg"
+                    src="../assets/logo.svg"
                     max-width="150"
                     style="margin-left: 60px"
                     v-if="$vuetify.breakpoint.lg || $vuetify.breakpoint.xl"
@@ -106,7 +106,7 @@ interface LoginData {
   dialog: boolean;
 
   showPassword: boolean;
-  form: any;
+  form: LoginDto;
   emailValidation: Validation;
   passwordValidation: Validation;
 }

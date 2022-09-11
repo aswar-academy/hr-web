@@ -38,7 +38,7 @@ export default Vue.extend({
         "USER",
         0,
         25
-      )) as Paginated<User>;
+      )) as Paginated;
       this.users = data.results;
     },
   },

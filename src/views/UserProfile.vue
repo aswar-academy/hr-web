@@ -95,10 +95,12 @@ export default Vue.extend({
   methods: {
     getUser() {
       this.loading = true;
-      UsersService.usersControllerFindOne(this.id!).then((value) => {
-        this.user = value;
-        this.id = value.id;
-      });
+      if (this.id) {
+        UsersService.usersControllerFindOne(this.id).then((value) => {
+          this.user = value;
+          this.id = value.id;
+        });
+      }
       this.loading = false;
     },
   },
