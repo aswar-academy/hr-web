@@ -66,7 +66,7 @@
               <v-container class="fill-height">
                 <div style="text-align: center">
                   <v-img
-                    src="../assets/logo.svg"
+                    src="../assets/Logo.svg"
                     max-width="150"
                     style="margin-left: 60px"
                     v-if="$vuetify.breakpoint.lg || $vuetify.breakpoint.xl"
