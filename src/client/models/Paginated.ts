@@ -2,8 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type Paginated<T> = {
+export type Paginated = {
     total: number;
-    results: Array<T>;
+    results: Array<any>;
 };
 
