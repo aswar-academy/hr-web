@@ -23,8 +23,8 @@
           <v-divider width="200"></v-divider>
           <div class="pt-4">
             <a href="https://academy.aswar.iq/" style="text-decoration: none">
-              <p class="text--secondary">
-                <v-icon>mdi-web</v-icon>Aswar Academy
+              <p class="text--secondary " >
+                <v-icon class="mr-1">mdi-web</v-icon>Aswar Academy
               </p>
             </a>
           </div>

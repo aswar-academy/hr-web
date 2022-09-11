@@ -8,6 +8,7 @@
       class="mt-5"
       @click="dialogCreate = true"
       elevation="1"
+      left
     >
       <v-icon color="#232F49">mdi-plus</v-icon>
     </v-btn>
