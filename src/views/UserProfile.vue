@@ -233,14 +233,6 @@ export default Vue.extend({
 });
 </script>
 <style>
-#user-div2 {
-  width: 200px;
-  border-radius: 2px;
-  text-align: center;
-  border-color: #d82d37;
-  border-style: solid;
-  border-width: 1px;
-}
 #task-container {
   border: #ffcd29 1px solid;
   border-color: #ffcd29;
