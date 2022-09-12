@@ -1,19 +1,13 @@
 <template>
-  <v-chip v-if="selectedState" :color="selectedState.color" filter>{{
-    selectedState.title
-  }}</v-chip>
+  <v-chip v-if="state == 'TODO'" color="yellow" filter>{{ state }}</v-chip>
+  <v-chip v-else-if="state == 'DOING'" color="red" filter>{{ state }}</v-chip>
+  <v-chip v-else-if="state == 'DONE'" color="green" filter>{{ state }}</v-chip>
 </template>
 <script lang="ts">
 import Vue from "vue";
 import { Task } from "../client";
-import { getSelectedState } from "../ui/state";
 
 export default Vue.extend({
-  computed: {
-    selectedState() {
-      return getSelectedState(this.state);
-    },
-  },
   props: {
     state: { type: String as () => Task.state },
   },
