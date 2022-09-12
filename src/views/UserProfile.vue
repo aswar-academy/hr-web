@@ -1,16 +1,11 @@
 <template>
   <div>
     <v-row align="center" justify="center" class="pt-10">
-      <v-progress-circular
-        size="60"
-        color="#FFD831"
-        v-if="loading"
-        indeterminate
-      ></v-progress-circular>
+      <v-progress-circular size="60" color="#FFD831" v-if="loading" indeterminate></v-progress-circular>
     </v-row>
     <div v-if="user == null"></div>
     <div class="pa-10" v-else>
-      <v-row>
+      <v-row >
         <v-col cols="2">
           <v-avatar size="200">
             <v-img src="../assets/user-avatar.svg"></v-img>
@@ -20,6 +15,7 @@
           <h3>{{ user.name }}</h3>
 
           <p class="text--secondary">{{ user.jobTitle }}</p>
+          <p class="text--secondary">{{ user.role }}</p>
         </v-col>
       </v-row>
       <v-row justify="space-between">
@@ -43,9 +39,7 @@
               <v-icon class="mr-1">mdi-calendar-range</v-icon>
               <strong>The date of join</strong>
 
-              <p class="pl-7 text--secondary">
-                {{ user.createdAt | formatDate }}
-              </p>
+              <p class="pl-7 text--secondary">{{ user.createdAt | formatDate }}</p>
             </div>
             <div>
               <a href="mailto:user.email" style="text-decoration: none">
@@ -61,22 +55,16 @@
         <v-col cols="5">
           <p class="overline text--disabled pt-4 ma-0">employee Tasks</p>
           <v-divider width="200"></v-divider>
-          <v-container
-            id="task-container"
-            class="mt-5"
-            v-for="task in user.tasks"
-            :key="task.id"
-          >
-            <p>{{ task.title }}</p>
+          <v-container id="task-container" class="mt-5" v-for="task in user.tasks" :key="task.id">
+            <v-row class="pa-3" justify="space-between">
+              <strong>{{ task.title }}</strong>
+              <p class="text--secondary">{{task.createdAt|formatAttendanceDate}}</p>
+            </v-row>
+
+            <p>{{task.description}}</p>
           </v-container>
-          <!-- <v-container id="task-container" class="mt-5">
-            <p>Create hr-web project and repository to aswar dashboard</p>
-          </v-container>
-          <v-container id="task-container" class="mt-5">
-            <p>Create hr-web project and repository to aswar dashboard</p>
-          </v-container> -->
         </v-col>
-        <v-col>
+        <v-col class="pl-16">
           <p class="overline text--disabled pt-4 ma-0">employee Attendance</p>
           <v-divider width="200"></v-divider>
 
@@ -111,25 +99,25 @@ export default Vue.extend({
     return {
       user: null,
       id: null,
-      loading: true,
+      loading: true
     };
   },
   methods: {
     getUser() {
       this.loading = true;
       if (this.id) {
-        UsersService.findOne(this.id).then((value) => {
+        UsersService.findOne(this.id).then(value => {
           this.user = value;
           this.id = value.id;
         });
       }
       this.loading = false;
-    },
+    }
   },
   created() {
-    this.id = this.$route.params.id as unknown as number;
+    this.id = (this.$route.params.id as unknown) as number;
     this.getUser();
-  },
+  }
 });
 </script>
 <style>
