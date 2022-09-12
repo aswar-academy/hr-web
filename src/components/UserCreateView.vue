@@ -91,15 +91,7 @@
                 v-model="userCreate.departmentId"
               ></v-autocomplete>
             </v-col>
-            <!-- <v-col cols="12" sm="4">
-              <v-text-field
-                outlined
-                ref="salary"
-                v-model="userCreate.salary"
-                label="Salary"
-                required
-              ></v-text-field>
-            </v-col>-->
+           
           </v-row>
         </v-container>
       </v-card>

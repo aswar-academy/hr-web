@@ -1,10 +1,5 @@
 <template>
-  <v-card
-    style="border-radius: 12px"
-    elevation="2"
-    class="pa-2 ma-2"
-    @click="goToUserProfile"
-  >
+  <v-card style="border-radius: 12px" elevation="2" class="pa-2 ma-2" @click="goToUserProfile">
     <v-row align="center" justify="center" class="pt-3">
       <v-avatar size="100">
         <v-img src="../assets/user-avatar.svg"></v-img>
@@ -26,7 +21,7 @@
       <v-row class="ma-0 pa-0" justify="space-between">
         <p class="ma-2" style="color: #6f7376">{{ user.department.name }}</p>
         <p class="ma-2" style="color: #6f7376">
-          {{ user.createdAt | formatDate }}
+          {{ formatDate(user.createdAt) }}
         </p>
       </v-row>
     </div>
@@ -34,15 +29,15 @@
 </template>
   
 <script lang="ts">
-import { User } from "@/client";
+import { UserDetail } from "@/client";
 import Vue from "vue";
-
+import { formatDate, formatDateTime } from "@/utils"
 export default Vue.extend({
   name: "App",
 
   props: {
     user: {
-      type: Object as () => User,
+      type: Object as () => UserDetail,
       required: true,
     },
     id: {
@@ -55,6 +50,8 @@ export default Vue.extend({
     goToUserProfile() {
       this.$router.push("/user/" + this.id);
     },
+    formatDate,
+    formatDateTime
   },
 });
 </script>

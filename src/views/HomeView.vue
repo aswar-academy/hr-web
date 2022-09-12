@@ -6,11 +6,11 @@
 
     <v-container>
       <v-row no-gutters>
-        <template v-for="user in users">
-          <v-col :key="user.id" cols="12" md="3">
-            <UserCard :user="user" :id="user.id" />
-          </v-col>
-        </template>
+
+        <v-col v-for="user in users" :key="user.id" cols="12" md="3">
+          <UserCard :user="user" :id="user.id" />
+        </v-col>
+
       </v-row>
     </v-container>
   </div>

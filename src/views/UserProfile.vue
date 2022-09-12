@@ -1,12 +1,7 @@
 <template>
   <div>
     <v-row align="center" justify="center" class="pt-10">
-      <v-progress-circular
-        size="60"
-        color="#FFD831"
-        v-if="loading"
-        indeterminate
-      ></v-progress-circular>
+      <v-progress-circular size="60" color="#FFD831" v-if="loading" indeterminate></v-progress-circular>
     </v-row>
     <div v-if="user == null"></div>
     <div class="pa-10" v-else>
@@ -45,7 +40,7 @@
               <strong>The date of join</strong>
 
               <p class="pl-7 text--secondary">
-                {{ user.createdAt | formatDate }}
+                {{ formatDate( user.createdAt) }}
               </p>
             </div>
             <div>
@@ -62,28 +57,17 @@
         <v-col cols="5">
           <p class="overline text--disabled pt-4 ma-0">
             employee Tasks
-            <v-btn
-              color="#ffd831"
-              small
-              elevation="2"
-              rounded="30"
-              @click="createTaskDialog = true"
-            >
+            <v-btn color="#ffd831" small elevation="2" rounded="30" @click="createTaskDialog = true">
               <v-icon color="#232F49">mdi-plus</v-icon>
             </v-btn>
           </p>
           <v-divider width="200"></v-divider>
-          <v-container
-            id="task-container"
-            class="mt-5"
-            v-for="task in user.tasks"
-            :key="task.id"
-            @click="selectedTask = task"
-          >
+          <v-container id="task-container" class="mt-5" v-for="task in user.tasks" :key="task.id"
+            @click="selectedTask = task">
             <v-row class="pa-3" justify="space-between">
               <strong>{{ task.title }}</strong>
               <p class="text--secondary">
-                {{ task.createdAt | formatAttendanceDate }}
+                {{formatDateTime( task.createdAt) }}
               </p>
             </v-row>
 
@@ -99,22 +83,17 @@
           <div v-for="item in user.attendance" :key="item.id" class="mt-5">
             <p>
               <strong class="pr-2">Attendance time</strong>
-              {{ item.createdAt | formatAttendanceDate }}
+              {{formatDateTime( item.createdAt) }}
             </p>
             <p>
               <strong class="pr-2">Work end time</strong>
-              {{ item.departureTime | formatAttendanceDate }}
+              {{ formatDateTime(item.departureTime) }}
             </p>
           </div>
         </v-col>
       </v-row>
     </div>
-    <v-dialog
-      v-model="createTaskDialog"
-      fullscreen
-      hide-overlay
-      transition="dialog-top-transition"
-    >
+    <v-dialog v-model="createTaskDialog" fullscreen hide-overlay transition="dialog-top-transition">
       <v-card>
         <v-toolbar dark color="#f2f8fd">
           <v-btn icon dark @click="createTaskDialog = false">
@@ -129,54 +108,26 @@
         <v-container class="pt-5">
           <v-row>
             <v-col cols="12" md="4">
-              <v-autocomplete
-                label="States"
-                clearable
-                :items="states"
-                outlined
-                v-model="taskCreate.state"
-              ></v-autocomplete>
+              <v-autocomplete label="States" clearable :items="states" outlined v-model="taskCreate.state">
+              </v-autocomplete>
             </v-col>
             <v-col cols="12" md="4">
-              <v-text-field
-                outlined
-                ref="title"
-                v-model="taskCreate.title"
-                label="Task Title"
-                required
-              ></v-text-field>
+              <v-text-field outlined ref="title" v-model="taskCreate.title" label="Task Title" required></v-text-field>
             </v-col>
             <v-col cols="12" md="4">
-              <v-textarea
-                outlined
-                name="input-7-4"
-                label="Description"
-                v-model="taskCreate.description"
-              ></v-textarea>
+              <v-textarea outlined name="input-7-4" label="Description" v-model="taskCreate.description"></v-textarea>
             </v-col>
           </v-row>
         </v-container>
       </v-card>
     </v-dialog>
-    <v-dialog
-      v-model="selectedTask"
-      v-if="selectedTask"
-      scrollable
-      persistent
-      :overlay="false"
-      max-width="500px"
-      transition="dialog-transition"
-    >
+    <v-dialog v-model="selectedTask" v-if="selectedTask" scrollable persistent :overlay="false" max-width="500px"
+      transition="dialog-transition">
       <v-card>
         <v-card-title primary-title>{{ selectedTask.title }}</v-card-title>
         <v-card-text>
           <v-col cols="12" md="12">
-            <v-autocomplete
-              label="States"
-              :items="states"
-              outlined
-              v-model="selectedTask.state"
-            ></v-autocomplete>
+            <v-autocomplete label="States" :items="states" outlined v-model="selectedTask.state"></v-autocomplete>
           </v-col>
         </v-card-text>
         <v-card-actions class="justify-end">
@@ -196,6 +147,7 @@ import {
   CreateTask,
   Task,
 } from "@/client";
+import { formatDate, formatDateTime } from "@/utils"
 import TaskStateChip from "@/components/TaskStateChip.vue";
 import Vue from "vue";
 interface UserProfileData {
@@ -222,7 +174,10 @@ export default Vue.extend({
       selectedTask: null,
     };
   },
+
   methods: {
+    formatDate,
+    formatDateTime,
     getUser() {
       this.loading = true;
       if (this.id) {
