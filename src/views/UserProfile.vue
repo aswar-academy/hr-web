@@ -1,7 +1,12 @@
 <template>
   <div>
     <v-row align="center" justify="center" class="pt-10">
-      <v-progress-circular size="60" color="#FFD831" v-if="loading" indeterminate></v-progress-circular>
+      <v-progress-circular
+        size="60"
+        color="#FFD831"
+        v-if="loading"
+        indeterminate
+      ></v-progress-circular>
     </v-row>
     <div v-if="user == null"></div>
     <div class="pa-10" v-else>
@@ -39,7 +44,9 @@
               <v-icon class="mr-1">mdi-calendar-range</v-icon>
               <strong>The date of join</strong>
 
-              <p class="pl-7 text--secondary">{{ user.createdAt | formatDate }}</p>
+              <p class="pl-7 text--secondary">
+                {{ user.createdAt | formatDate }}
+              </p>
             </div>
             <div>
               <a href="mailto:user.email" style="text-decoration: none">
@@ -55,7 +62,13 @@
         <v-col cols="5">
           <p class="overline text--disabled pt-4 ma-0">
             employee Tasks
-            <v-btn color="#ffd831" small elevation="2" rounded="30" @click="createTaskDialog=true">
+            <v-btn
+              color="#ffd831"
+              small
+              elevation="2"
+              rounded="30"
+              @click="createTaskDialog = true"
+            >
               <v-icon color="#232F49">mdi-plus</v-icon>
             </v-btn>
           </p>
@@ -65,15 +78,18 @@
             class="mt-5"
             v-for="task in user.tasks"
             :key="task.id"
-            @click="selectedTask=task"
+            @click="selectedTask = task"
           >
             <v-row class="pa-3" justify="space-between">
               <strong>{{ task.title }}</strong>
-              <p class="text--secondary">{{task.createdAt|formatAttendanceDate}}</p>
+              <p class="text--secondary">
+                {{ task.createdAt | formatAttendanceDate }}
+              </p>
             </v-row>
 
-            <p>{{task.description}}</p>
-            <p class="overline text--disabled pt-4 ma-0">{{task.state}}</p>
+            <p>{{ task.description }}</p>
+            <TaskStateChip :state="task.state" />
+            <!-- <p class="overline text--disabled pt-4 ma-0">{{ task.state }}</p> -->
           </v-container>
         </v-col>
         <v-col class="pl-16">
@@ -93,7 +109,12 @@
         </v-col>
       </v-row>
     </div>
-    <v-dialog v-model="createTaskDialog" fullscreen hide-overlay transition="dialog-top-transition">
+    <v-dialog
+      v-model="createTaskDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-top-transition"
+    >
       <v-card>
         <v-toolbar dark color="#f2f8fd">
           <v-btn icon dark @click="createTaskDialog = false">
@@ -147,12 +168,11 @@
       transition="dialog-transition"
     >
       <v-card>
-        <v-card-title primary-title>{{selectedTask.title}}</v-card-title>
+        <v-card-title primary-title>{{ selectedTask.title }}</v-card-title>
         <v-card-text>
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="12">
             <v-autocomplete
               label="States"
-              clearable
               :items="states"
               outlined
               v-model="selectedTask.state"
@@ -174,8 +194,9 @@ import {
   UsersService,
   TasksService,
   CreateTask,
-  Task
+  Task,
 } from "@/client";
+import TaskStateChip from "@/components/TaskStateChip.vue";
 import Vue from "vue";
 interface UserProfileData {
   user?: UserDetail | null;
@@ -187,6 +208,7 @@ interface UserProfileData {
   selectedTask: null | Task;
 }
 export default Vue.extend({
+  components: { TaskStateChip },
   name: "App",
 
   data(): UserProfileData {
@@ -197,14 +219,14 @@ export default Vue.extend({
       createTaskDialog: false,
       taskCreate: {} as CreateTask,
       states: Object.values(CreateTask.state),
-      selectedTask: null
+      selectedTask: null,
     };
   },
   methods: {
     getUser() {
       this.loading = true;
       if (this.id) {
-        UsersService.findOne(this.id).then(value => {
+        UsersService.findOne(this.id).then((value) => {
           this.user = value;
           this.id = value.id;
         });
@@ -224,12 +246,12 @@ export default Vue.extend({
           this.selectedTask = null;
         }
       );
-    }
+    },
   },
   created() {
-    this.id = (this.$route.params.id as unknown) as number;
+    this.id = this.$route.params.id as unknown as number;
     this.getUser();
-  }
+  },
 });
 </script>
 <style>
