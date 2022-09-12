@@ -60,7 +60,13 @@
             </v-btn>
           </p>
           <v-divider width="200"></v-divider>
-          <v-container id="task-container" class="mt-5" v-for="task in user.tasks" :key="task.id">
+          <v-container
+            id="task-container"
+            class="mt-5"
+            v-for="task in user.tasks"
+            :key="task.id"
+            @click="selectedTask=task"
+          >
             <v-row class="pa-3" justify="space-between">
               <strong>{{ task.title }}</strong>
               <p class="text--secondary">{{task.createdAt|formatAttendanceDate}}</p>
@@ -128,15 +134,48 @@
               ></v-textarea>
             </v-col>
           </v-row>
-         
         </v-container>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      v-model="selectedTask"
+      v-if="selectedTask"
+      scrollable
+      persistent
+      :overlay="false"
+      max-width="500px"
+      transition="dialog-transition"
+    >
+      <v-card>
+        <v-card-title primary-title>{{selectedTask.title}}</v-card-title>
+        <v-card-text>
+          <v-col cols="12" md="4">
+            <v-autocomplete
+              label="States"
+              clearable
+              :items="states"
+              outlined
+              v-model="selectedTask.state"
+            ></v-autocomplete>
+          </v-col>
+        </v-card-text>
+        <v-card-actions class="justify-end">
+          <v-btn text @click="selectedTask = null">Close</v-btn>
+          <v-btn text @click="editStateTask">Save</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
 </template>
 
 <script lang="ts">
-import { UserDetail, UsersService, TasksService, CreateTask } from "@/client";
+import {
+  UserDetail,
+  UsersService,
+  TasksService,
+  CreateTask,
+  Task
+} from "@/client";
 import Vue from "vue";
 interface UserProfileData {
   user?: UserDetail | null;
@@ -145,6 +184,7 @@ interface UserProfileData {
   createTaskDialog: boolean;
   taskCreate: CreateTask;
   states: Array<CreateTask.state>;
+  selectedTask: null | Task;
 }
 export default Vue.extend({
   name: "App",
@@ -156,7 +196,8 @@ export default Vue.extend({
       loading: true,
       createTaskDialog: false,
       taskCreate: {} as CreateTask,
-      states: Object.values(CreateTask.state)
+      states: Object.values(CreateTask.state),
+      selectedTask: null
     };
   },
   methods: {
@@ -176,6 +217,13 @@ export default Vue.extend({
         this.createTaskDialog = false;
         this.getUser();
       });
+    },
+    editStateTask(): void {
+      TasksService.markAs(this.selectedTask!.id, this.selectedTask!.state).then(
+        () => {
+          this.selectedTask = null;
+        }
+      );
     }
   },
   created() {
