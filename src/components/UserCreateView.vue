@@ -13,20 +13,13 @@
       <v-icon color="#232F49">mdi-plus</v-icon>
     </v-btn>
 
-    <v-dialog
-      v-model="dialogCreate"
-      fullscreen
-      hide-overlay
-      transition="dialog-top-transition"
-    >
+    <v-dialog v-model="dialogCreate" fullscreen hide-overlay transition="dialog-top-transition">
       <v-card>
         <v-toolbar dark color="#f2f8fd">
           <v-btn icon dark @click="dialogCreate = false">
             <v-icon color="#232F49">mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title style="color: #232f49"
-            >Add New employee</v-toolbar-title
-          >
+          <v-toolbar-title style="color: #232f49">Add New employee</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn dark text color="#232F49" @click="createUser">Save</v-btn>
@@ -119,7 +112,7 @@ import {
   Department,
   DepartmentsService,
   PaginatedDepartment,
-  UsersService,
+  UsersService
 } from "@/client";
 import { Validation } from "@/types/Validation";
 import { emailValidation, passwordValidation } from "@/utils/Validation";
@@ -141,9 +134,9 @@ export default Vue.extend({
       email: emailValidation,
       password: passwordValidation,
       userCreate: {
-        salary: 0,
+        salary: 0
       } as CreateUser,
-      departments: [],
+      departments: []
     };
   },
   methods: {
@@ -157,10 +150,10 @@ export default Vue.extend({
       DepartmentsService.findAll(0, 25).then((value: PaginatedDepartment) => {
         this.departments = value.results;
       });
-    },
+    }
   },
   created() {
     this.getDepartment();
-  },
+  }
 });
 </script>

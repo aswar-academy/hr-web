@@ -2,11 +2,7 @@
   <v-container class="fill-height" fluid>
     <v-row justify="center">
       <v-col cols="12" sm="8" md="8">
-        <v-card
-          elevation="10"
-          style="border-radius: 10px"
-          class="pl-5 main-card"
-        >
+        <v-card elevation="10" style="border-radius: 10px" class="pl-5 main-card">
           <v-row>
             <v-col cols="8">
               <div class="pa-10" style="text-align: center">
@@ -27,7 +23,7 @@
                   ></v-text-field>
                   <v-text-field
                     v-model="form.password"
-                    :rules="emailValidation"
+                    :rules="passwordValidation"
                     color="#232F49"
                     label="Password"
                     name="password"
@@ -48,8 +44,7 @@
                       rounded
                       dark
                       class="mb-10"
-                      >Login</v-btn
-                    >
+                    >Login</v-btn>
                   </div>
                 </v-form>
               </v-row>
@@ -74,9 +69,7 @@
                   <p
                     class="pt-10 white--text"
                     v-if="$vuetify.breakpoint.lg || $vuetify.breakpoint.xl"
-                  >
-                    Enter your personal details and start journey with us
-                  </p>
+                  >Enter your personal details and start journey with us</p>
                 </div>
               </v-container>
             </v-col>
@@ -93,6 +86,14 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+      <v-dialog v-model="unAuthDialog" width="500">
+        <v-card>
+          <v-card-title>User can't access to the dashboard</v-card-title>
+          <v-card-actions>
+            <v-btn v-btn color="primary" text @click="unAuthDialog = false">Ok</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </v-container>
 </template>
@@ -104,7 +105,7 @@ import { TOKEN } from "@/utils/keys";
 import Vue from "vue";
 interface LoginData {
   dialog: boolean;
-
+  unAuthDialog: boolean;
   showPassword: boolean;
   form: LoginDto;
   emailValidation: Validation;
@@ -114,33 +115,37 @@ export default Vue.extend({
   data(): LoginData {
     const defaultForm: LoginDto = {
       password: "",
-      email: "",
+      email: ""
     };
     return {
       dialog: false,
-
+      unAuthDialog: false,
       showPassword: false,
       form: defaultForm,
       emailValidation: emailValidation,
-      passwordValidation: passwordValidation,
+      passwordValidation: passwordValidation
     };
   },
   methods: {
     login(): void {
       AuthService.login({
         email: this.form.email,
-        password: this.form.password,
+        password: this.form.password
       })
-        .then((value) => {
-          localStorage.setItem(TOKEN, value.token);
-          this.$router.push("/");
+        .then(register => {
+          if (register.user.role == "ADMIN") {
+            localStorage.setItem(TOKEN, register.token);
+            this.$router.push("/");
+          } else {
+            this.unAuthDialog = true;
+          }
         })
         .catch(() => {
           this.dialog = true;
         });
-    },
+    }
   },
-  components: {},
+  components: {}
 });
 </script>
     <style>
