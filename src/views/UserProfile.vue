@@ -6,12 +6,12 @@
     <div v-if="user == null"></div>
     <div class="pa-10" v-else>
       <v-row>
-        <v-col cols="2">
+        <v-col cols="12"  lg="2" xl="2" md="2">
           <v-avatar size="200">
             <v-img src="../assets/user-avatar.svg"></v-img>
           </v-avatar>
         </v-col>
-        <v-col class="pl-10" cols="3" align-self="center">
+        <v-col class="pl-10" cols="12"  lg="3" xl="3" md="3" align-self="center">
           <h3>{{ user.name }}</h3>
 
           <p class="text--secondary">{{ user.jobTitle }}</p>
@@ -19,7 +19,7 @@
         </v-col>
       </v-row>
       <v-row justify="space-between">
-        <v-col cols="3">
+        <v-col cols="12"  lg="3" xl="3" md="3">
           <p class="overline text--disabled pt-4 ma-0">employee record</p>
           <v-divider width="200"></v-divider>
           <div class="pt-4">
@@ -54,7 +54,7 @@
           </div>
         </v-col>
 
-        <v-col cols="5">
+        <v-col cols="12"  lg="5" xl="5" md="5">
           <p class="overline text--disabled pt-4 ma-0">
             employee Tasks
             <v-btn color="#ffd831" small elevation="2" rounded="30" @click="createTaskDialog = true">

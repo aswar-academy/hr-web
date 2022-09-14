@@ -1,5 +1,5 @@
 <template>
-  <v-row align="center" justify="center" class="mt-5">
+  <v-row align="center" justify="center" class="mt-5 pl-2">
     <v-col cols="12" md="2">
       <v-autocomplete
         label="User Types"
