@@ -1,6 +1,6 @@
 {
   "name": "Aswar Hr dashboard",
-  "short_name": "HR dashboard",
+  "short_name": "Aswar",
   "theme_color": "primary",
   "icons": [
     {
@@ -28,5 +28,5 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#000000"
+  "background_color": "#232F49"
 }
